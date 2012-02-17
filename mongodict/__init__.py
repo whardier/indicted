@@ -21,12 +21,12 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-"""MongoDict - PyMongo Document Dictionary Helper Class"""
+"""MongoDict - PyMongo Document Helper Classes"""
 
 version = "0.0.1"
 version_info = (0, 0, 1)
 
 from .mongodict import MongoList
-from .mongodict import MongoDocument
-from .mongodict import MongoOrderedDocument
+from .mongodict import MongoDict
+from .mongodict import MongoOrderedDict
 
