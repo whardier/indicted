@@ -67,3 +67,7 @@ Yields
 None
 ```
 
+Todo
+----
+
+* Dot Notation
