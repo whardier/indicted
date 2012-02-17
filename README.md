@@ -67,7 +67,12 @@ Yields
 None
 ```
 
+There is also **mongodict.MongoOrderedDict** that inherits 
+**collections.OrderedDict**.  This is incredibly useful for maintaining the 
+document key ordering of your documents.
+    
 Todo
 ----
 
-* Dot Notation
+* Dot notation
+* JSON encoding/decoding/pretty printing helpers
