@@ -45,7 +45,7 @@ class MongoList(list):
             return None
 
 
-class _MongoDocument(object):
+class _MongoDict(object):
     def __init__(self, *args, **kwargs):
         if issubclass(type(self), dict):
             self.__dict_class = dict
@@ -58,9 +58,9 @@ class _MongoDocument(object):
         self.__dict_class.__setitem__(self, key, val)
 
 
-class MongoDocument(_MongoDocument, dict):
+class MongoDict(_MongoDict, dict):
     pass
 
 
-class MongoOrderedDocument(_MongoDocument, OrderedDict):
+class MongoOrderedDict(_MongoDict, OrderedDict):
     pass      
