@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 #
 #  Copyright (c) 2012  Shane R. Spencer
@@ -24,4 +25,8 @@
 
 version = "0.0.1"
 version_info = (0, 0, 1)
+
+from .mongodict import MongoList
+from .mongodict import MongoDocument
+from .mongodict import MongoOrderedDocument
 
