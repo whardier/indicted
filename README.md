@@ -71,6 +71,12 @@ None
 There is also **mongodict.MongoOrderedDict** that inherits 
 **collections.OrderedDict**.  This is incredibly useful for maintaining the 
 document key ordering of your documents.
+
+Status
+------
+
+Currently this module only creates references during the initialization of the 
+list.  This will be addressed soon.
     
 Todo
 ----
