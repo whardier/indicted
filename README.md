@@ -10,7 +10,7 @@ Take for example the following data.  This structure is being used to reduce
 relationships between a parent object and sub objects.  This allows us to create 
 indexes that help with relationships rather than making multiple calls to a 
 database.  This is just an example structure of a document.  This specific 
-structure will benifit heavily from a multi-value index on 'subdata._id'.
+structure will benifit heavily from a multi-value index on **subdata._id**.
 
 ```javascript
 {
