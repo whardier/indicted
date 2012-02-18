@@ -28,8 +28,8 @@ from collections import OrderedDict
 
 class MongoList(list):
     def __init__(self, iterable=[]):
-        list.__init__(self, iterable)
         self.__ids = {}
+        list.__init__(self, iterable)
 
         for n, i in enumerate(self):
             if issubclass(type(i), dict):
@@ -44,6 +44,8 @@ class MongoList(list):
         else:
             return None
 
+    def ids(self):
+        return sorted(self.__ids.keys(), key=lambda k: self.__ids[k])
 
 class _MongoDict(object):
     def __init__(self, *args, **kwargs):
