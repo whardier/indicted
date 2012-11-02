@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 from distutils.core import setup
 
 from indicted import __version__
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
     name='indicted',
@@ -14,7 +18,7 @@ setup(
     url='https://github.com/whardier/indicted',
     license='MIT',
     description='Indexed Dictionary Class',
-    long_description=open('README.md').read(),
+    long_description=read('README'),
     classifiers=[
         'Programming Language :: Python',
         'Operating System :: OS Independent',
