@@ -1,7 +1,12 @@
-MongoDict
+indicted
 =========
 
-MongoDict - PyMongo Document Helper Classes
+indicted - Indexed Document Class
+
+Summary
+-------
+
+Find an list element, which is a dict, by a keys value
 
 Usage
 -----
@@ -38,27 +43,31 @@ an array when using standard Dict/List types.
 
 Ideally we would want to return the list element that matches a specific **_id** 
 if the list contains dictionaries that have a key matching that ObjectId.  This 
-is where MongoDict and MongoList comes in.  MongiDict is a simple Dict wrapper 
-that uses MongoList for all list type values.  As MongoList is initialized and 
+is where indicted and Inist comes in.  InDict is a simple Dict wrapper 
+that uses InList for all list type values.  As InList is initialized and 
 modified it keeps an internal dictionary of **_id** references relating to list 
-positions.  An extra function called **MongoList.find_id** is used to pull out a 
+positions.  An extra function called **InList.find** is used to pull out a 
 referenced object if it finds one.  **None** is returned otherwise.
     
 ```python
 import pprint
 import pymongo
 
-from mongodict import MongoDict
+from bson import ObjectId
 
-from pymongo.objectid import ObjectId
+from indicted import InDict
 
-connection = pymongo.Connection(document_class=MongoDict)
+class MongoInDict(InDict):
+    INDEXCLASS = ObjectId
+    INDEXKEY = '_id'
+
+connection = pymongo.Connection(document_class=MongoInDict)
 database = connection.test
 
 data = database.data.find_one()
 
-pprint.pprint(data['subdata'].find_id(ObjectId('4f3eb7cac4f804960a859469')))
-pprint.pprint(data['subdata'].find_id(ObjectId('000000000000000000000000')))
+pprint.pprint(data['subdata'].find(ObjectId('4f3eb7cac4f804960a859469')))
+pprint.pprint(data['subdata'].find(ObjectId('000000000000000000000000')))
 ```
 
 Yields
@@ -68,7 +77,7 @@ Yields
 None
 ```
 
-There is also **mongodict.MongoOrderedDict** that inherits 
+There is also **indicted.OrderedInDict** that inherits 
 **collections.OrderedDict**.  This is incredibly useful for maintaining the 
 document key ordering of your documents.
 

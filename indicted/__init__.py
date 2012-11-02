@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 #
 #  Copyright (c) 2012  Shane R. Spencer
@@ -20,24 +21,22 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-import pymongo
-
-from pymongo.objectid import ObjectId
+"""indicted - Indexed Dictionary Class"""
 
 from collections import OrderedDict
 
-class MongoList(list):
-    def __init__(self, iterable=[]):
+class InList(list):
+    def __init__(self, iterable=[], indexclass=None, indexkey=None):
         self.__ids = {}
         list.__init__(self, iterable)
 
         for n, i in enumerate(self):
             if issubclass(type(i), dict):
-                _id = i.get('_id')
-                if issubclass(type(_id), ObjectId):
-                    self.__ids[_id] = int(n)            
+                _id = i.get(indexkey)
+                if issubclass(type(_id), indexclass):
+                    self.__ids[_id] = int(n)
 
-    def find_id(self, id):
+    def find(self, id):
         _n = self.__ids.get(id)
         if not isinstance(_n, None.__class__):
             return self[_n]
@@ -47,7 +46,11 @@ class MongoList(list):
     def ids(self):
         return sorted(self.__ids.keys(), key=lambda k: self.__ids[k])
 
-class _MongoDict(object):
+class _InDict(object):
+
+    INDEXCLASS = int
+    INDEXKEY = "_id"
+
     def __init__(self, *args, **kwargs):
         if issubclass(type(self), dict):
             self.__dict_class = dict
@@ -56,13 +59,12 @@ class _MongoDict(object):
         self.__dict_class.__init__(self, *args, **kwargs)
 
     def __setitem__(self, key, val):
-        if issubclass(type(val), list): val = MongoList(val)
+        if issubclass(type(val), list): val = InList(val, self.INDEXCLASS, self.INDEXKEY)
         self.__dict_class.__setitem__(self, key, val)
 
 
-class MongoDict(_MongoDict, dict):
+class InDict(_InDict, dict):
     pass
 
-
-class MongoOrderedDict(_MongoDict, OrderedDict):
+class OrderedInDict(_InDict, OrderedDict):
     pass      
